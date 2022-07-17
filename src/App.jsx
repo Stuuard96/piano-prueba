@@ -1,7 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 
 export const App = () => {
+  const [nameUser, setNameUser] = useState();
+
   useEffect(() => {
     (function (src) {
       var a = document.createElement("script");
@@ -20,21 +22,22 @@ export const App = () => {
 
   const PianoLogin = () => {
     console.log("login");
-    const tp = window.tp || [];
-    tp.push([
+    // const tp = window.tp || [];
+    window.tp.push([
       "init",
       function () {
-        tp.pianoId.show({
+        window.tp.pianoId.show({
           disableSignUp: false,
           displayMode: "modal",
           screen: "register",
           containerSelector: "#login-form",
           loggedIn: function (data) {
             console.log("user", data.user, "logged in with token", data.token);
+            setNameUser(data.user.given_name);
           },
 
           loggedOut: function () {
-            console.log("user logged out");
+            console.log("El usuario cerro sesión");
           },
         });
       },
@@ -42,25 +45,23 @@ export const App = () => {
   };
 
   const PianoLogout = () => {
-    const tp = window.tp || [];
-    tp.push([
+    // const tp = window.tp || [];
+    window.tp.push([
       "init",
       function () {
         console.log("logout");
-        tp = window.tp || [];
-        tp.pianoId.logout();
-        //reload the page
+        window.tp.pianoId.logout();
         window.location.reload();
       },
     ]);
   };
 
   const PianoProfile = () => {
-    const tp = window["tp"] || [];
-    tp.push([
+    // const tp = window["tp"] || [];
+    window.tp.push([
       "init",
       function () {
-        tp.myaccount.show({
+        window.tp.myaccount.show({
           displayMode: "inline",
           containerSelector: "#my-account",
         });
@@ -71,7 +72,7 @@ export const App = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <p>Bienvenido a mi sitio</p>
+        <p>Bienvenido a mi sitio {nameUser}</p>
         <a
           className="App-link"
           href="#"
