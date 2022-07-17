@@ -12,8 +12,10 @@ export const App = () => {
       b.parentNode.insertBefore(a, b);
     })("//sandbox.tinypass.com/xbuilder/experience/load?aid=PeVZORGJsu");
 
-    // const tp=window.tp || [];
-    // tp.push(["setCookieDomain", ""])
+    setTimeout(() => {
+      const tp = window.tp || [];
+      tp.push(["setCookieDomain", "piano-prueb.netlify.app"]);
+    }, 1000);
   }, []);
 
   const PianoLogin = () => {
